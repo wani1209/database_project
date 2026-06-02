@@ -8,7 +8,9 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from db import get_conn, query, execute
 
-app = Flask(__name__, static_folder="../frontend", static_url_path="")
+FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
+
+app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="")
 CORS(app)
 
 # ──────────────────────────────────────────────
@@ -16,7 +18,7 @@ CORS(app)
 # ──────────────────────────────────────────────
 @app.route("/")
 def index():
-    return send_from_directory(app.static_folder, "index.html")
+    return send_from_directory(FRONTEND_DIR, "index.html")
 
 # ──────────────────────────────────────────────
 # 영화 목록 & 상세

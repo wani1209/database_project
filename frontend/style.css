@@ -2,16 +2,16 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #0d0f14;
-  --bg2:       #161b26;
-  --bg3:       #1e2535;
+  --bg:        #ffffff;
+  --bg2:       #f4f4f8;
+  --bg3:       #e8e8f0;
   --accent:    #e50914;
-  --accent2:   #ff6b6b;
-  --text:      #f0f0f0;
-  --text2:     #9aa3b5;
-  --border:    #2a3144;
+  --accent2:   #c40811;
+  --text:      #1a1a2e;
+  --text2:     #64748b;
+  --border:    #d4d4e0;
   --radius:    12px;
-  --shadow:    0 4px 24px rgba(0,0,0,.5);
+  --shadow:    0 4px 24px rgba(0,0,0,.1);
 }
 
 body {
@@ -83,7 +83,7 @@ body {
 
 .movie-poster {
   width: 100%; aspect-ratio: 2/3;
-  background: linear-gradient(135deg, var(--bg3) 0%, #252d40 100%);
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
   display: flex; align-items: center; justify-content: center;
   font-size: 3.5rem;
 }
@@ -119,17 +119,18 @@ body {
   padding: 4px 10px; border-radius: 6px;
   font-size: .8rem; font-weight: 600;
 }
-.seats-ok  { background: rgba(34,197,94,.15); color: #4ade80; }
-.seats-few { background: rgba(234,179, 8,.15); color: #facc15; }
-.seats-no  { background: rgba(239,68, 68,.15); color: #f87171; }
+.seats-ok  { background: #dcfce7; color: #16a34a; }
+.seats-few { background: #fef9c3; color: #b45309; }
+.seats-no  { background: #fee2e2; color: #dc2626; }
 
 /* ── 좌석 맵 ── */
 .screen-label {
   text-align: center; margin: 8px auto 24px;
-  max-width: 600px; padding: 8px;
-  background: linear-gradient(180deg, #4a90e2 0%, transparent 100%);
+  max-width: 600px; padding: 10px;
+  background: linear-gradient(180deg, #c4b5fd 0%, #ede9fe 100%);
   border-radius: 4px 4px 0 0;
-  font-size: .8rem; letter-spacing: 4px; color: #93c5fd;
+  font-size: .8rem; letter-spacing: 4px; color: #5b21b6;
+  font-weight: 600;
 }
 #seat-map {
   display: flex; flex-direction: column; align-items: center; gap: 6px;
@@ -148,10 +149,10 @@ body {
   cursor: pointer; transition: all .15s; border: none;
   user-select: none;
 }
-.seat.available  { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
-.seat.available:hover { background: #2a3550; border-color: #4a90e2; }
-.seat.selected   { background: #4a90e2; color: #fff; border: 1px solid #4a90e2; }
-.seat.reserved   { background: var(--border); color: #555; cursor: not-allowed; }
+.seat.available  { background: #fff; color: #64748b; border: 2px solid #cbd5e1; }
+.seat.available:hover { background: #ede9fe; border-color: #7c3aed; color: #5b21b6; }
+.seat.selected   { background: #7c3aed; color: #fff; border: 2px solid #5b21b6; box-shadow: 0 2px 8px rgba(124,58,237,.4); }
+.seat.reserved   { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; border: 2px solid #cbd5e1; }
 .seat.gap        { background: none; border: none; cursor: default; visibility: hidden; }
 
 .seat-legend {
@@ -162,9 +163,9 @@ body {
 .dot {
   width: 16px; height: 14px; border-radius: 4px 4px 1px 1px;
 }
-.dot.available { background: var(--bg3); border: 1px solid var(--border); }
-.dot.selected  { background: #4a90e2; }
-.dot.reserved  { background: var(--border); }
+.dot.available { background: #fff; border: 2px solid #cbd5e1; }
+.dot.selected  { background: #7c3aed; }
+.dot.reserved  { background: #e2e8f0; border: 2px solid #cbd5e1; }
 
 /* ── 예약 패널 ── */
 #seat-info-bar {
@@ -222,8 +223,8 @@ body {
 .status-badge {
   padding: 4px 12px; border-radius: 20px; font-size: .8rem; font-weight: 600;
 }
-.status-confirmed { background: rgba(34,197,94,.15); color: #4ade80; }
-.status-cancelled { background: rgba(239,68,68,.15); color: #f87171; }
+.status-confirmed { background: #dcfce7; color: #16a34a; }
+.status-cancelled { background: #fee2e2; color: #dc2626; }
 
 /* ── 버튼 ── */
 .btn-primary {

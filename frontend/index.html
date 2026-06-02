@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CinemaDB - 영화 예약 시스템</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 네비게이션 -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <span class="logo" onclick="showPage('movies')">🎬 CinemaDB</span>
+      <div class="nav-links">
+        <button class="nav-btn active" id="nav-movies" onclick="showPage('movies')">상영 중인 영화</button>
+        <button class="nav-btn" id="nav-myreservations" onclick="showPage('myreservations')">내 예약 조회</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 영화 목록 페이지 -->
+  <div id="page-movies" class="page active">
+    <div class="container">
+      <h1 class="page-title">지금 상영 중인 영화</h1>
+      <div id="movie-list" class="movie-grid">
+        <div class="loading">영화 목록을 불러오는 중...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 상영 시간 선택 페이지 -->
+  <div id="page-screenings" class="page">
+    <div class="container">
+      <button class="back-btn" onclick="showPage('movies')">← 영화 목록으로</button>
+      <div id="movie-detail"></div>
+      <h2 class="section-title">상영 시간 선택</h2>
+      <div id="screening-list"></div>
+    </div>
+  </div>
+
+  <!-- 좌석 선택 페이지 -->
+  <div id="page-seats" class="page">
+    <div class="container">
+      <button class="back-btn" id="back-to-screenings">← 상영 시간 선택으로</button>
+      <div id="seat-info-bar"></div>
+
+      <div class="screen-label">SCREEN</div>
+
+      <div id="seat-map"></div>
+
+      <div class="seat-legend">
+        <span class="legend-item"><span class="dot available"></span>선택 가능</span>
+        <span class="legend-item"><span class="dot selected"></span>선택됨</span>
+        <span class="legend-item"><span class="dot reserved"></span>예약됨</span>
+      </div>
+
+      <div id="booking-panel" class="booking-panel hidden">
+        <div class="booking-summary">
+          <span id="selected-count">0석 선택</span>
+          <span id="total-price">0원</span>
+        </div>
+        <div class="booking-form">
+          <input type="text"  id="booker-name"  placeholder="예약자 이름" maxlength="50" />
+          <input type="tel"   id="booker-phone" placeholder="전화번호 (예: 010-1234-5678)" maxlength="20" />
+          <button class="btn-primary" id="confirm-btn" onclick="confirmReservation()">예약 확정</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 내 예약 조회 페이지 -->
+  <div id="page-myreservations" class="page">
+    <div class="container">
+      <h1 class="page-title">내 예약 조회</h1>
+      <div class="lookup-form card">
+        <input type="text" id="lookup-name"  placeholder="예약자 이름" maxlength="50" />
+        <input type="tel"  id="lookup-phone" placeholder="전화번호 (예: 010-1234-5678)" maxlength="20" />
+        <button class="btn-primary" onclick="lookupReservations()">조회하기</button>
+      </div>
+      <div id="reservation-list"></div>
+    </div>
+  </div>
+
+  <!-- 성공 모달 -->
+  <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-icon">✅</div>
+      <h2 id="modal-title">예약 완료!</h2>
+      <p id="modal-body"></p>
+      <button class="btn-primary" onclick="closeModal()">확인</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

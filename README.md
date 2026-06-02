@@ -17,8 +17,8 @@ PostgreSQL을 활용한 영화관 좌석 예약 웹 서비스입니다.
 
 ```
 movies ──< screenings >── theaters
-                │
-                ▼
+                │            | 
+               / \          / \
           reservations >── seats
 ```
 

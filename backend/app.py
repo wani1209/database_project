@@ -4,9 +4,23 @@ import psycopg2
 import psycopg2.extras
 import os
 import sys
+import time
 
 sys.path.insert(0, os.path.dirname(__file__))
 from db import get_conn, query, execute
+
+
+def wait_for_db(max_retries=30, delay=2):
+    for i in range(max_retries):
+        try:
+            conn = get_conn()
+            conn.close()
+            print("Database connection established.", flush=True)
+            return
+        except Exception:
+            print(f"Waiting for database... ({i+1}/{max_retries})", flush=True)
+            time.sleep(delay)
+    raise RuntimeError("Could not connect to database")
 
 FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
 
@@ -181,4 +195,6 @@ def cancel_reservation(reservation_id):
     return jsonify({"message": "예약이 취소되었습니다."})
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    wait_for_db()
+    debug = os.getenv("FLASK_DEBUG", "false").lower() == "true"
+    app.run(host="0.0.0.0", debug=debug, port=8080)

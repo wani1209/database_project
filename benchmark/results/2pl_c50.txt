@@ -1,0 +1,13 @@
+pgbench (18.3 (Homebrew), server 16.13 (Debian 16.13-1.pgdg13+1))
+transaction type: benchmark/workload_2pl.sql
+scaling factor: 1
+query mode: simple
+number of clients: 50
+number of threads: 8
+maximum number of tries: 1
+duration: 60 s
+number of transactions actually processed: 562268
+number of failed transactions: 0 (0.000%)
+latency average = 5.326 ms
+initial connection time = 116.933 ms
+tps = 9387.816422 (without initial connection time)

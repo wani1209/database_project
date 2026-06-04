@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: cinema_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: wani
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: cinema
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./database/insert_data.sql:/docker-entrypoint-initdb.d/02_data.sql
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wani -d cinema"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cinema_backend
+    restart: unless-stopped
+    environment:
+      DB_NAME: cinema
+      DB_USER: wani
+      DB_PASSWORD: "1234"
+      DB_HOST: db
+      DB_PORT: "5432"
+      FLASK_DEBUG: "false"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+    driver: local

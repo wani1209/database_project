@@ -4,8 +4,8 @@ import os
 
 DB_CONFIG = {
     "dbname":   os.getenv("DB_NAME",     "cinema"),
-    "user":     os.getenv("DB_USER",     os.getenv("USER", "mac")),
-    "password": os.getenv("DB_PASSWORD", ""),
+    "user":     os.getenv("DB_USER",     "wani"),
+    "password": os.getenv("DB_PASSWORD", "1234"),
     "host":     os.getenv("DB_HOST",     "localhost"),
     "port":     os.getenv("DB_PORT",     "5432"),
 }
